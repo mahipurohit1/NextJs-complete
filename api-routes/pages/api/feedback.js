@@ -16,7 +16,10 @@ const handler = (req, res) => {
     fs.writeFileSync(filePath, JSON.stringify(fileDataArray));
     res.status(201).json({ message: "Success", feedback });
   } else {
-    res.status(200).json({ message: "its works!!" });
+    const filePath = path.join(process.cwd(), "data", "feedback.json");
+    const fileData = fs.readFileSync(filePath);
+    const fileDataArray = JSON.parse(fileData);
+    res.status(200).json({ data: fileDataArray });
   }
 };
 export default handler;
