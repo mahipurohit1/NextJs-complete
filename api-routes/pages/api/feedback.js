@@ -5,6 +5,7 @@ const handler = (req, res) => {
     const { email, feedback } = req.body;
 
     const data = {
+      id: Math.random().toString(),
       email,
       feedback,
     };
@@ -12,7 +13,6 @@ const handler = (req, res) => {
     const fileData = fs.readFileSync(filePath);
     const fileDataArray = JSON.parse(fileData);
     fileDataArray.push(data);
-    console.log(fileDataArray);
     fs.writeFileSync(filePath, JSON.stringify(fileDataArray));
     res.status(201).json({ message: "Success", feedback });
   } else {
